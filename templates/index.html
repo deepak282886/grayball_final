@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GenAI-Bot</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    * {
+        box-sizing: border-box
+    }
+    /* Set height of body and the document to 100% */
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial;
+    }
+    #chatbox {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-top: 60px;
+    }
+    #userInput {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-top: 60px;
+    }
+    #textInput {
+    width: 90%;
+    border: none;
+    border-bottom: 3px solid black;
+    font-family: monospace;
+    font-size: 17px;
+    }
+    .userText {
+    color: black;
+    font-family: monospace;
+    font-size: 17px;
+    text-align: left;
+    line-height: 30px;
+    }
+    .userText span {
+    /* background-color: #808080; */
+    /* padding: 10px; */
+    border-radius: 2px;
+    }
+    .botText {
+    color: black;
+    font-family: monospace;
+    font-size: 17px;
+    text-align: left;
+    line-height: 30px;
+    }
+    .botText span {
+    /* background-color: #b4c0e3; */
+    /* padding: 10px; */
+    border-radius: 2px;
+    }
+    #tidbit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    }
+    .boxed {
+    margin-left: auto;
+    margin-right: auto;
+    width: 78%;
+    margin-top: 60px;
+    border: 1px solid green;
+    }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Chatbot</h1>
+    <div class="row">
+      <div class="col-sm-12 col-lg-30">
+        <div class="panel panel-default">
+          <div class="panel-heading">Made my Moses Daudu - ML Engineer</div>
+          <div class="panel-body">
+            <h1 align="center"><b>MD's ChatBot Powered by Vertex AI</b></h1>
+            <h4 align="center"><b>Please start your personalized interaction with the chatbot</b></h4>
+            <p align="center"><img src="static\\chatbot1.png" alt="Python-BOT" height="210" width="220"></p>
+          </div>
+          <div class="boxed">
+            <div>
+                <div id="chatbox">
+                    <p class="botText">
+                        <span>Hi! What would you like to know today?</span>
+                    </p>
+                </div>
+                <div id="userInput">
+                    <input class="userText" id="textInput" type="text" name="msg" placeholder="Message" />
+                </div>
+            </div>
+            <script>
+                function getBotResponse() {
+                    var rawText = $("#textInput").val();
+                    var userHtml = '<p class="userText"><span style="color: blue;">User: </span>' + rawText + "</p>";
+                    $("#textInput").val("");
+                    $("#chatbox").append(userHtml);
+                    document
+                        .getElementById("userInput")
+                        .scrollIntoView({ block: "start", behavior: "smooth" });
+                    $.get("/get", { msg: rawText }).done(function (data) {
+                        var botHtml = '<p class="botText"><span style="color: green;">ChatBot: </span>' + data + "</p>";
+                        $("#chatbox").append(botHtml);
+                        document
+                            .getElementById("userInput")
+                            .scrollIntoView({ block: "start", behavior: "smooth" });
+                    });
+                }
+                $("#textInput").keypress(function (e) {
+                    if (e.which == 13) {
+                        getBotResponse();
+                    }
+                });
+            </script>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
