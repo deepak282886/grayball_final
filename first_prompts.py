@@ -1,8 +1,10 @@
 prompt_ques = """
 <task>
-Given a question you have to identify if the question asked is related to cricket because we can only process cricket questions.
-Once confimed, your task is if the question is too complex then break it down into multiple questions, 
-if multiple questions are there then also break it down into multiple questions. 
+Given a question and conversation context you have to identify if the question asked is related to cricket 
+because we can only process cricket questions.
+Once confirmed, your task is to use the conversation context and query to form a question that can be processed. 
+If the question is too complex then break it down into multiple easy questions. 
+If multiple questions are there then also break it down into multiple questions. 
 </task>
 
 <format>
@@ -15,7 +17,8 @@ Give the questions in the form of a json as output as follows:-
 <instruction>
 If question does not need to change then don't change the question and give it as it is in json format above. 
 If question is not related to cricket then give empty json. 
-Just give the json nothing else.
+Use the conversation context and query to form the questions effectively.
+Just give the json nothing else. No explanation.
 </instruction>
 """
 

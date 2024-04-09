@@ -268,8 +268,8 @@ def answer_misc_question(input_q):
     return response
 
 
-def query_prepare(input_q):
-    prompt_f = f"{prompt_ques} <query> {input_q} </query>"
+def query_prepare(input_q, alltext):
+    prompt_f = f"{prompt_ques}<conversation_context>{alltext}</conversation_context><query> {input_q} </query>"
 
     response = get_haiku_response(prompt_f)
     response = combine_responses(response)

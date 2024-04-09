@@ -1,7 +1,8 @@
 from first_utils import query_prepare, process_classification_actions, get_final_output
 
-def get_query_answer(input_q):
-    list_dict = query_prepare(input_q)
+def get_query_answer(input_q, alltext):
+    print(alltext, "alltext")
+    list_dict = query_prepare(input_q, alltext)
     context, link_list, var_proceed = process_classification_actions(list_dict, input_q)
     if var_proceed:
         answer_list = get_final_output(context, list_dict)

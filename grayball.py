@@ -14,6 +14,7 @@ def chat_with_ai():
     
     # Extract the message from the request data
     userText = data.get('msg')
+    alltext = data.get('allQueries')
     
     
     
@@ -21,7 +22,7 @@ def chat_with_ai():
     if not userText:
         return jsonify({"error": "No message provided"}), 400
     
-    final_answer, link_list, context = get_query_answer(userText)
+    final_answer, link_list, context = get_query_answer(userText, alltext)
     
     if isinstance(final_answer, list):
     	full_text = ""
